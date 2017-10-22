@@ -3,11 +3,14 @@
 This is PHP HTTP Client for easy send HTTP requests and integrate with web services.
 Uses PSR-7 interfaces for responses, and streams.
 
-### Requirements
+## Requirements
 
-HttpClient requires PHP version 7.1.0 or greater. Usage: `psr/http-message`
+HttpClient requires PHP version 7.1.0 or greater.
+
+Usage: `psr/http-message`
 
 Usage for development: `jakub-onderka/php-parallel-lint`, `phpstan/phpstan`, `squizlabs/php_codesniffer`, `phpmd/phpmd`,
+
 `Php Inspections (EA Extended)`
 
 ## Installation
