@@ -28,7 +28,17 @@ $ composer install
 ## Testing
 
 ```php
-$ php bin/phpunit
+$ bin/phpunit
+```
+
+### Static Analysis
+
+```php
+$ bin/parallel-lint --exclude vendor .
+```
+
+```php
+$ bin/phpstan analyse src tests -l 7
 ```
 
 ## Examples
