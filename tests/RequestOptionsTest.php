@@ -18,7 +18,7 @@ use PHPUnit\Framework\TestCase;
 
 final class RequestOptionsTest extends TestCase
 {
-    public function testSetRequestOptions()
+    public function testSetRequestOptions(): void
     {
         $baseUri = new Uri('http://foo.com/');
         $options = new RequestOptions([

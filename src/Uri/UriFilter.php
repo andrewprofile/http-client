@@ -245,7 +245,7 @@ class UriFilter
             return true;
         }
         
-        if (!$host || !$port) {
+        if (!$host || $port === null) {
             return false;
         }
         

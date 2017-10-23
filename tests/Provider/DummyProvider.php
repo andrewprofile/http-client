@@ -12,7 +12,6 @@ declare(strict_types=1);
 namespace HttpClient\Provider;
 
 use HttpClient\Exception\InvalidArgumentException;
-use HttpClient\Headers;
 use HttpClient\Provider\Curl\CurlAuthMethod;
 use HttpClient\Request\RequestOptions;
 use HttpClient\Response\TextResponse;
@@ -33,7 +32,7 @@ final class DummyProvider extends AbstractProvider
     private $uri;
     
     /**
-     * @var Headers
+     * @var array
      */
     private $headers;
     
@@ -64,7 +63,7 @@ final class DummyProvider extends AbstractProvider
     public function request(string $method, Uri $uri, RequestOptions $options): ResponseInterface
     {
         $this->uri = (new UriBuilder($options->getBaseUri(), $uri))->build();
-        $this->headers = $options->getHeaders() ? $options->getHeaders()->map() : new Headers($this->uri, []);
+        $this->headers = $options->getHeaders() ? $options->getHeaders()->map() : [];
         if ($options->isWithCredentials()) {
             $auth = $options->getAuth();
             $this->authMethod = $auth[self::AUTH_METHOD] ?? CurlAuthMethod::BASIC;
@@ -87,9 +86,9 @@ final class DummyProvider extends AbstractProvider
     }
     
     /**
-     * @return string
+     * @return array|string|null
      */
-    public function getBody(): ?string
+    public function getBody()
     {
         return $this->body;
     }
@@ -111,9 +110,9 @@ final class DummyProvider extends AbstractProvider
     }
     
     /**
-     * @return Headers
+     * @return array
      */
-    public function getHeaders(): Headers
+    public function getHeaders(): array
     {
         return $this->headers;
     }

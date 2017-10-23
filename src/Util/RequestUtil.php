@@ -78,11 +78,11 @@ final class RequestUtil
      */
     public static function camelize(string $input, string $separator = '_'): string
     {
-        if (isset(static::$camelCache[$input])) {
-            return static::$camelCache[$input];
+        if (isset(self::$camelCache[$input])) {
+            return self::$camelCache[$input];
         }
         
-        return static::$camelCache[$input] = lcfirst(static::studly($input, $separator));
+        return self::$camelCache[$input] = lcfirst(self::studly($input, $separator));
     }
     
     /**
