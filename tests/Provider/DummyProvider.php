@@ -64,6 +64,7 @@ final class DummyProvider extends AbstractProvider
     {
         $this->uri = (new UriBuilder($options->getBaseUri(), $uri))->build();
         $this->headers = $options->getHeaders() ? $options->getHeaders()->map() : [];
+
         if ($options->isWithCredentials()) {
             $auth = $options->getAuth();
             $this->authMethod = $auth[self::AUTH_METHOD] ?? CurlAuthMethod::BASIC;

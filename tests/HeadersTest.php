@@ -81,7 +81,7 @@ final class HeadersTest extends TestCase
         $headers = new Headers(new Uri('http://foo.com'), []);
         
         $headers->setHost('bar.com');
-        
+
         $this->assertEquals(
             ['bar.com'],
             $headers->getHeader('Host')
