@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace HttpClient\Response;
 
+use HttpClient\HeadersFilter;
 use HttpClient\Headers;
 use HttpClient\Util\HttpSecurity;
 use Psr\Http\Message\MessageInterface;
@@ -88,7 +89,7 @@ abstract class AbstractMessage implements MessageInterface
      */
     public function withAddedHeader($name, $value): self
     {
-        [$name, $value] = Headers::assertValidHeader($name, $value);
+        [$name, $value] = HeadersFilter::assertValidHeader($name, $value);
         if (!$this->hasHeader($name)) {
             return $this->withHeader($name, $value);
         }
@@ -112,7 +113,7 @@ abstract class AbstractMessage implements MessageInterface
      */
     public function withHeader($name, $value): self
     {
-        [$name, $value] = Headers::assertValidHeader($name, $value);
+        [$name, $value] = HeadersFilter::assertValidHeader($name, $value);
         $self = clone $this;
         $self->headers->setHeader($name, $value);
         

@@ -51,6 +51,7 @@ final class CurlProvider extends AbstractProvider implements Provider, ProviderO
         }
         
         $this->handle = curl_init();
+        $this->initOptions();
     }
 
     public function __destruct()
@@ -61,18 +62,6 @@ final class CurlProvider extends AbstractProvider implements Provider, ProviderO
     public function __clone()
     {
         $this->handle = curl_copy_handle($this->handle);
-    }
-    
-    /**
-     * @return void
-     */
-    public function initOptions(): void
-    {
-        $this->setOptions([
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_USERAGENT       => 'HttpClient/' . self::VERSION,
-            CURLOPT_HEADERFUNCTION => [$this,'readHeader'],
-        ]);
     }
     
     /**
@@ -145,6 +134,18 @@ final class CurlProvider extends AbstractProvider implements Provider, ProviderO
         $this->responseHeader .= $headerLine;
     
         return strlen($headerLine);
+    }
+    
+    /**
+     * @return void
+     */
+    private function initOptions(): void
+    {
+        $this->setOptions([
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_USERAGENT       => 'HttpClient/' . self::VERSION,
+            CURLOPT_HEADERFUNCTION => [$this,'readHeader'],
+        ]);
     }
     
     /**

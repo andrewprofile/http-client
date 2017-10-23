@@ -14,11 +14,6 @@ namespace HttpClient\Provider;
 interface ProviderOption
 {
     /**
-     * @return void
-     */
-    public function initOptions(): void;
-    
-    /**
      * @param int      $option
      * @param callable $value
      * @return bool
