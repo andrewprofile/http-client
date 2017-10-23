@@ -62,7 +62,7 @@ echo $respose->getStatusCode();
 echo $respose->getHeaderLine('content-type');
 // "application/json"
 echo $respose->getBody();
-// "{"version":"v1","success":true,"data":{"producers":[ //...// ]},"error":null}
+// "{"version":"v1","success":true,"data":{"producers":[ //...// ]},"error":null}"
 ```
 
 #### Example 2
@@ -82,7 +82,7 @@ echo $respose->getStatusCode();
 echo $respose->getHeaderLine('content-type');
 // "application/json"
 echo $respose->getBody();
-// "{"version":"v1","success":true,"data":{"producers":[ //...// ]},"error":null}
+// "{"version":"v1","success":true,"data":{"producers":[ //...// ]},"error":null}"
 ```
 
 #### Example 3
@@ -115,5 +115,5 @@ echo $respose->getStatusCode();
 echo $respose->getHeaderLine('content-type');
 // "application/json"
 echo $respose->getBody();
-// "{"version":"v1","success":true,"data":{"producer":[ //...// ]},"error":null}
+// "{"version":"v1","success":true,"data":{"producer":[ //...// ]},"error":null}"
 ```

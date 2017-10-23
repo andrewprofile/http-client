@@ -11,8 +11,6 @@ declare(strict_types=1);
 
 namespace HttpClient;
 
-use HttpClient\Header\HeaderFilter;
-use HttpClient\Util\HttpSecurity;
 use Psr\Http\Message\UriInterface;
 
 final class Headers

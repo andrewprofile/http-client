@@ -56,6 +56,7 @@ final class UriTest extends TestCase
     public function testImmutability(): void
     {
         $uri = new Uri();
+
         $this->assertNotSame($uri, $uri->withScheme('https'));
         $this->assertNotSame($uri, $uri->withUserInfo('username', 'password'));
         $this->assertNotSame($uri, $uri->withHost('example.com'));
@@ -68,6 +69,7 @@ final class UriTest extends TestCase
     public function testDefaultReturnValuesOfGetters(): void
     {
         $uri = new Uri();
+
         $this->assertSame('', $uri->getScheme());
         $this->assertSame('', $uri->getAuthority());
         $this->assertSame('', $uri->getUserInfo());

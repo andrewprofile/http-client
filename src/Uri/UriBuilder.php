@@ -77,7 +77,7 @@ final class UriBuilder
         return $uri;
     }
     
-    public static function createQueryWithFragment(?string $query, ?string $fragment): string
+    public static function createQueryWithFragment(string $query, string $fragment): string
     {
         $queryWithFragment = '';
         if ($query) {
