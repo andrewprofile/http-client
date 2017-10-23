@@ -64,6 +64,18 @@ final class CurlProvider extends AbstractProvider implements Provider, ProviderO
     }
     
     /**
+     * @return void
+     */
+    public function initOptions(): void
+    {
+        $this->setOptions([
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_USERAGENT       => 'HttpClient/' . self::VERSION,
+            CURLOPT_HEADERFUNCTION => [$this,'readHeader'],
+        ]);
+    }
+    
+    /**
      * @param string         $method
      * @param Uri            $uri
      * @param RequestOptions $options
@@ -80,21 +92,9 @@ final class CurlProvider extends AbstractProvider implements Provider, ProviderO
             CURLOPT_URL => (string) $uriWithBaseUri,
             CURLOPT_HTTPHEADER => $options->getHeaders() ? $options->getHeaders()->map() : [],
             CURLOPT_CUSTOMREQUEST => $method,
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_USERAGENT       => 'HttpClient/' . self::VERSION,
-            CURLOPT_HEADERFUNCTION => [$this,'readHeader'],
         ]);
 
-        if ($options->isWithCredentials()) {
-            $auth = $options->getAuth();
-            $this->setOption(CURLOPT_HTTPAUTH, function () use ($auth) {
-                return $auth[self::AUTH_METHOD] ?? CurlAuthMethod::BASIC;
-            });
-            
-            $this->setOption(CURLOPT_USERPWD, function () use ($auth) {
-                return "{$auth[self::USERNAME]}:{$auth[self::PASSWORD]}";
-            });
-        }
+        $this->setAuth($options);
         
         if ($options->hasBody()) {
             $this->setOption(CURLOPT_POSTFIELDS, function () use ($options) {
@@ -153,5 +153,22 @@ final class CurlProvider extends AbstractProvider implements Provider, ProviderO
     private static function isAvailable(): bool
     {
         return extension_loaded('curl');
+    }
+    
+    /**
+     * @param RequestOptions $options
+     */
+    private function setAuth(RequestOptions $options): void
+    {
+        if ($options->isWithCredentials()) {
+            $auth = $options->getAuth();
+            $this->setOption(CURLOPT_HTTPAUTH, function () use ($auth) {
+                return $auth[self::AUTH_METHOD] ?? CurlAuthMethod::BASIC;
+            });
+        
+            $this->setOption(CURLOPT_USERPWD, function () use ($auth) {
+                return "{$auth[self::USERNAME]}:{$auth[self::PASSWORD]}";
+            });
+        }
     }
 }
