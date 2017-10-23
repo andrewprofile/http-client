@@ -55,13 +55,13 @@ $options = new RequestOptions([
     ]),
 ]);
 
-$respose = $request->get($uri, $options);
+$response = $request->get($uri, $options);
 
-echo $respose->getStatusCode();
+echo $response->getStatusCode();
 // "200"
-echo $respose->getHeaderLine('content-type');
+echo $response->getHeaderLine('content-type');
 // "application/json"
-echo $respose->getBody();
+echo $response->getBody();
 // "{"version":"v1","success":true,"data":{"producers":[ //...// ]},"error":null}"
 ```
 
@@ -77,11 +77,11 @@ $options = new RequestOptions([
 
 $response = $request->request(RequestMethod::GET, new Uri('/v1/producers'), $options);
 
-echo $respose->getStatusCode();
+echo $response->getStatusCode();
 // "200"
-echo $respose->getHeaderLine('content-type');
+echo $response->getHeaderLine('content-type');
 // "application/json"
-echo $respose->getBody();
+echo $response->getBody();
 // "{"version":"v1","success":true,"data":{"producers":[ //...// ]},"error":null}"
 ```
 
@@ -110,10 +110,10 @@ $options = new RequestOptions([
 
 $response = $request->post(new Uri('/v1/producers'), $options);
 
-echo $respose->getStatusCode();
+echo $response->getStatusCode();
 // "200"
-echo $respose->getHeaderLine('content-type');
+echo $response->getHeaderLine('content-type');
 // "application/json"
-echo $respose->getBody();
+echo $response->getBody();
 // "{"version":"v1","success":true,"data":{"producer":[ //...// ]},"error":null}"
 ```
